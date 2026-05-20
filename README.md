@@ -1,2 +1,0 @@
-# wangjingli.com
-wangjingli.com
