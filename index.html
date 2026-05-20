@@ -110,6 +110,63 @@
       align-items: center;
       justify-content: center;
       padding: 24px;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: -45%;
+      z-index: 0;
+      pointer-events: none;
+      background:
+        radial-gradient(circle at 25% 25%, rgba(235, 239, 242, 0.18), transparent 26%),
+        radial-gradient(circle at 75% 35%, rgba(150, 158, 166, 0.16), transparent 28%),
+        radial-gradient(circle at 52% 78%, rgba(255, 255, 255, 0.10), transparent 30%);
+      filter: blur(6px);
+      opacity: 0.75;
+      animation: bgGlowMove 18s ease-in-out infinite alternate;
+    }
+
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.045) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.045) 1px, transparent 1px);
+      background-size: 72px 72px;
+      opacity: 0.18;
+      animation: bgGridMove 28s linear infinite;
+      mask-image: radial-gradient(circle at center, rgba(0,0,0,0.9), transparent 72%);
+      -webkit-mask-image: radial-gradient(circle at center, rgba(0,0,0,0.9), transparent 72%);
+    }
+
+    @keyframes bgGlowMove {
+      0% {
+        transform: translate3d(-3%, -2%, 0) scale(1);
+      }
+
+      50% {
+        transform: translate3d(4%, 3%, 0) scale(1.05);
+      }
+
+      100% {
+        transform: translate3d(2%, -4%, 0) scale(1.08);
+      }
+    }
+
+    @keyframes bgGridMove {
+      0% {
+        background-position: 0 0, 0 0;
+      }
+
+      100% {
+        background-position: 72px 72px, 72px 72px;
+      }
     }
 
     .business-card {
@@ -121,6 +178,7 @@
       border-radius: 28px;
       overflow: hidden;
       position: relative;
+      z-index: 1;
       background:
         linear-gradient(135deg, rgba(255,255,255,0.08), rgba(255,255,255,0.015)),
         linear-gradient(145deg, #1a1a1a 0%, #090909 100%);
@@ -297,6 +355,13 @@
       font-size: 14px;
       color: #d8dce0;
       letter-spacing: 1.5px;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      body::before,
+      body::after {
+        animation: none;
+      }
     }
 
     @media (max-width: 720px) {
